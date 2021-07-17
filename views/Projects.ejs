@@ -1,0 +1,26 @@
+<%- include('./partials/header.ejs'); -%>
+
+<h1 class="text-center py-5 mt-5"> 
+    <span>Projects</span>
+</h1>
+
+<div class="container">
+    <% projects.forEach((project) => { %>
+            <div class="bg-white py-4 px-5 m-2">
+                <h3><%= project.name %></h3> 
+                <div class="d-flex justify-content-between align-items-center">
+                    <p>- <%= project.author.username %> </p>
+                    <% var x = new Date(project.createdAt); x = x.toDateString() %>
+                    <p>Created <%= x %></p>
+                    <a href="/project/<%= project.id %>"><button class="btn btn-success">Details</button></a>
+                </div>
+                
+            </div>
+    <%   }) %>
+</div>
+
+<div class="text-center my-5">
+    <a href="/"><button class="btn btn-lg btn-outline-secondary border-0">Go back</button></a>
+</div>
+
+<%- include('./partials/footer.ejs'); -%>

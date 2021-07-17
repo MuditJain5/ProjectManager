@@ -1,0 +1,11 @@
+<%- include('./partials/header.ejs'); -%>
+
+<div class="container form text-center">
+    <h1>Add Comment</h1>
+    <form action="/project/<%= projectId %>/issue/<%= issueId %>/comment" method="post">
+        <textarea class="form-control my-3" rows="6" name="comment" placeholder="Comment"></textarea>
+        <button class="btn btn-block btn-success" type="submit">Add</button>
+    </form>
+</div>
+
+<%- include('./partials/footer.ejs'); -%>

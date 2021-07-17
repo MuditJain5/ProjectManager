@@ -1,0 +1,18 @@
+<%- include('./partials/header.ejs'); -%>
+
+<h1 class="text-center py-5 mt-5">Welcome to Project Manager</h1>
+
+<div class="text-center mt-5 pt-5">
+    <a href="/addproject"><button class="btn btn-lg btn-primary">New Project</button></a>
+</div>
+
+<% if(currentUser){ %>
+    <div class="d-flex justify-content-around">
+        <div class="text-center mt-5">
+            <a href="/projects"><button class="btn btn-lg btn-danger">Ongoing Projects</button></a>
+        </div>
+    </div>
+    
+<% } %>
+
+<%- include('./partials/footer.ejs'); -%>

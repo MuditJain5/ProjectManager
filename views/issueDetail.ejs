@@ -1,0 +1,64 @@
+<%- include('./partials/header.ejs'); -%>
+
+<div class="container pt-4">
+    <a href="/project/<%= project._id %>/issue"><i class="fas fa-arrow-left"></i> Back to Issues</a>
+    <h1 class="mt-4"><%= issue.name %></h1>
+    
+    <% if(issue.author.id.equals(currentUser._id)){ %>
+    
+        <div class="float-right mr-5">
+            <form method="POST" action="/project/<%= project._id %>/issue/<%= issue._id %>?_method=DELETE">
+                <button type="submit" class="btn btn-outline-danger">Delete</button>
+            </form>
+        </div>
+        <a class="float-right mr-3" href="/project/<%= project._id %>/issue/<%= issue._id %>/edit"><button class="btn btn-outline-info">Edit</button></a>
+        
+        
+    <% } %>
+
+    <p class="mb-5">- <%= issue.author.username %></p>
+
+    <p><%= issue.description %></p>
+    
+
+    <div class="d-flex align-items-center justify-content-center m-5">
+    <% if(issue.resolved){ %>
+        <p class="font-weight-bold mr-5 m-0">Status: <span class="text-success">Resolved</span></p>
+        <form method="POST" action="/project/<%= project._id %>/issue/<%= issue._id %>/status?_method=PUT">
+            <button class="btn btn-sm btn-primary" type="submit">Change</button>
+        </form>
+    <% } else{ %>
+        <p class="font-weight-bold mr-5 m-0">Status: Active</p>
+        <form method="POST" action="/project/<%= project._id %>/issue/<%= issue._id %>/status?_method=PUT">
+            <button class="btn btn-sm btn-primary" type="submit">Change</button>
+        </form>
+    <% } %>
+    </div>
+
+
+<h2>Comments</h2>
+
+<% comments.forEach((comment) => { %>
+    <% if(comment.issue.id.equals(issue._id)){ %>
+        
+        <div class="card my-4" style="width: 50%;">
+        <div class="card-header">
+            
+            <% var user = users.find(us => us._id.equals(comment.author.id) ) %>
+            <% var x = new Date(comment.createdAt); x = x.toDateString() %>
+            <span class="font-weight-bold"><%= user.username %></span> commented on <%= x %>
+
+        </div>
+        <div class="card-body">
+            <p class="card-title"><%= comment.text %></p>
+            <!-- <p class="card-text"><%= comment.text %></p> -->
+        </div>
+        </div>
+<% }}) %>
+
+<a href="/project/<%= project._id %>/issue/<%= issue._id %>/comment/add" class="btn btn-danger my-5">Add Comment</a>
+
+</div>
+
+
+<%- include('./partials/footer.ejs'); -%>

@@ -1,0 +1,12 @@
+<%- include('./partials/header.ejs'); -%>
+
+<div class="container form text-center">
+    <h1>Edit Issue</h1>
+    <form method="POST" action="/project/<%= projectId %>/issue/<%= issue._id %>?_method=PUT">
+        <input class="form-control mt-5" type="text" name="name" value="<%= issue.name %>" placeholder="name">
+        <textarea class="form-control my-3" rows="6" name="description" placeholder="description"><%= issue.description %></textarea>
+        <button class="btn btn-block btn-success" type="submit">Add</button>
+    </form>
+</div>
+
+<%- include('./partials/footer.ejs'); -%>
